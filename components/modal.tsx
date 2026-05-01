@@ -1,40 +1,30 @@
-import { Button } from "./ui/button"
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "./ui/dialog"
+import * as UI from "./ui/dialog"
 
 export function Modal() {
   return (
-    <Dialog>
+    <UI.Dialog>
 
-      <DialogTrigger asChild>
+      <UI.DialogTrigger asChild>
         <Button variant="outline">Open Dialog</Button>
-      </DialogTrigger>
+      </UI.DialogTrigger>
 
-      <DialogContent className="sm:max-w-sm">
+      <UI.DialogContent className="sm:max-w-sm">
 
-        <DialogHeader>
-          <DialogTitle>Modal Title</DialogTitle>
-          <DialogDescription>
+        <UI.DialogHeader>
+          <UI.DialogTitle>Add Modal Title</UI.DialogTitle>
+          <UI.DialogDescription>
             Add any description you like here.
-          </DialogDescription>
-        </DialogHeader>
+          </UI.DialogDescription>
+        </UI.DialogHeader>
 
-        <DialogFooter>
-          <DialogClose asChild>
+        <UI.DialogFooter>
+          <UI.DialogClose asChild>
             <Button variant="default">Close</Button>
-          </DialogClose>
-        </DialogFooter>
+          </UI.DialogClose>
+        </UI.DialogFooter>
 
-      </DialogContent>
+      </UI.DialogContent>
 
-    </Dialog>
+    </UI.Dialog>
   )
 }
