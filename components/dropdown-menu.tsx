@@ -1,110 +1,48 @@
+import { Button } from "./ui/button"
 import * as UI from "./ui/dropdown-menu"
 
-function DropdownMenu({ ...props }: React.ComponentProps<typeof UI.DropdownMenu>) {
-	return <UI.DropdownMenu {...props} />
-}
+export function DropdownMenu() {
+  return (
+    <UI.DropdownMenu>
 
-function DropdownMenuPortal({ ...props }: React.ComponentProps<typeof UI.DropdownMenuPortal>) {
-	return <UI.DropdownMenuPortal {...props} />
-}
+      <UI.DropdownMenuTrigger asChild>
+        <Button variant="outline">Open</Button>
+      </UI.DropdownMenuTrigger>
 
-function DropdownMenuTrigger({ ...props }: React.ComponentProps<typeof UI.DropdownMenuTrigger>) {
-	return <UI.DropdownMenuTrigger {...props} />
-}
+      <UI.DropdownMenuContent className="w-40" align="start">
 
-function DropdownMenuContent({
-	className,
-	align = "start",
-	sideOffset = 4,
-	...props
-}: React.ComponentProps<typeof UI.DropdownMenuContent>) {
-	return (
-		<UI.DropdownMenuContent className={className} align={align} sideOffset={sideOffset} {...props} />
-	)
-}
+        <UI.DropdownMenuGroup>
+          <UI.DropdownMenuLabel>Add Menu Label</UI.DropdownMenuLabel>
+          <UI.DropdownMenuItem>
+            Add item one
+            <UI.DropdownMenuShortcut>⇧⌘E</UI.DropdownMenuShortcut>
+          </UI.DropdownMenuItem>
+          <UI.DropdownMenuItem>
+            Add item two
+            <UI.DropdownMenuShortcut>⌘X</UI.DropdownMenuShortcut>
+          </UI.DropdownMenuItem>
+          <UI.DropdownMenuItem disabled>
+            Add item three
+          </UI.DropdownMenuItem>
+        </UI.DropdownMenuGroup>
 
-function DropdownMenuGroup({ ...props }: React.ComponentProps<typeof UI.DropdownMenuGroup>) {
-	return <UI.DropdownMenuGroup {...props} />
-}
+        <UI.DropdownMenuSeparator />
 
-function DropdownMenuLabel({ className, inset, ...props }: React.ComponentProps<typeof UI.DropdownMenuLabel> & { inset?: boolean }) {
-	return <UI.DropdownMenuLabel className={className} inset={inset} {...props} />
-}
+        <UI.DropdownMenuGroup>
+          <UI.DropdownMenuSub>
+            <UI.DropdownMenuSubTrigger>Submenu</UI.DropdownMenuSubTrigger>
+            <UI.DropdownMenuPortal>
+              <UI.DropdownMenuSubContent>
+                <UI.DropdownMenuItem>Add subitem one</UI.DropdownMenuItem>
+                <UI.DropdownMenuItem>Add subitem two</UI.DropdownMenuItem>
+                <UI.DropdownMenuSeparator />
+                <UI.DropdownMenuItem>More...</UI.DropdownMenuItem>
+              </UI.DropdownMenuSubContent>
+            </UI.DropdownMenuPortal>
+          </UI.DropdownMenuSub>
+        </UI.DropdownMenuGroup>
 
-function DropdownMenuItem({ className, inset, ...props }: React.ComponentProps<typeof UI.DropdownMenuItem>) {
-	return <UI.DropdownMenuItem className={className} {...props} />
-}
-
-function DropdownMenuCheckboxItem({
-	className,
-	children,
-	...props
-}: React.ComponentProps<typeof UI.DropdownMenuCheckboxItem>) {
-	return (
-		<UI.DropdownMenuCheckboxItem className={className} {...props}>
-			{children}
-		</UI.DropdownMenuCheckboxItem>
-	)
-}
-
-function DropdownMenuRadioGroup({ ...props }: React.ComponentProps<typeof UI.DropdownMenuRadioGroup>) {
-	return <UI.DropdownMenuRadioGroup {...props} />
-}
-
-function DropdownMenuRadioItem({
-	className,
-	children,
-	...props
-}: React.ComponentProps<typeof UI.DropdownMenuRadioItem>) {
-	return (
-		<UI.DropdownMenuRadioItem className={className} {...props}>
-			{children}
-		</UI.DropdownMenuRadioItem>
-	)
-}
-
-function DropdownMenuSeparator({ className, ...props }: React.ComponentProps<typeof UI.DropdownMenuSeparator>) {
-	return <UI.DropdownMenuSeparator className={className} {...props} />
-}
-
-function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<typeof UI.DropdownMenuShortcut>) {
-	return <UI.DropdownMenuShortcut className={className} {...props} />
-}
-
-function DropdownMenuSub({ ...props }: React.ComponentProps<typeof UI.DropdownMenuSub>) {
-	return <UI.DropdownMenuSub {...props} />
-}
-
-function DropdownMenuSubTrigger({
-	className,
-	children,
-	...props
-}: React.ComponentProps<typeof UI.DropdownMenuSubTrigger>) {
-	return (
-		<UI.DropdownMenuSubTrigger className={className} {...props}>
-			{children}
-		</UI.DropdownMenuSubTrigger>
-	)
-}
-
-function DropdownMenuSubContent({ className, ...props }: React.ComponentProps<typeof UI.DropdownMenuSubContent>) {
-	return <UI.DropdownMenuSubContent className={className} {...props} />
-}
-
-export {
-	DropdownMenu,
-	DropdownMenuPortal,
-	DropdownMenuTrigger,
-	DropdownMenuContent,
-	DropdownMenuGroup,
-	DropdownMenuLabel,
-	DropdownMenuItem,
-	DropdownMenuCheckboxItem,
-	DropdownMenuRadioGroup,
-	DropdownMenuRadioItem,
-	DropdownMenuSeparator,
-	DropdownMenuShortcut,
-	DropdownMenuSub,
-	DropdownMenuSubTrigger,
-	DropdownMenuSubContent,
+      </UI.DropdownMenuContent>
+    </UI.DropdownMenu>
+  )
 }
