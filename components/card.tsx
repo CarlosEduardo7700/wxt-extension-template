@@ -1,53 +1,25 @@
 import * as UI from "./ui/card"
 
-function Card({ className, size = "default", ...props }: React.ComponentProps<"div"> & { size?: "default" | "sm" }) {
+export function Card() {
   return (
-    <UI.Card className={className} size={size} {...props} />
-  )
-}
+    <UI.Card>
 
-function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <UI.CardHeader className={className} {...props} />
-  )
-}
+      <UI.CardHeader>
+        <UI.CardTitle>Add Card Title</UI.CardTitle>
+        <UI.CardDescription>Add any description you like here.</UI.CardDescription>
+        <UI.CardAction>
+          <Button variant="link">Add action</Button>
+        </UI.CardAction>
+      </UI.CardHeader>
 
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <UI.CardTitle className={className} {...props} />
-  )
-}
+      <UI.CardContent>
+        <p>Add any content you like here.</p>
+      </UI.CardContent>
 
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <UI.CardDescription className={className} {...props} />
-  )
-}
+      <UI.CardFooter>
+        <p>Add any footer content you like here.</p>
+      </UI.CardFooter>
 
-function CardAction({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <UI.CardAction className={className} {...props} />
+    </UI.Card>
   )
-}
-
-function CardContent({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <UI.CardContent className={className} {...props} />
-  )
-}
-
-function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <UI.CardFooter className={className} {...props} />
-  )
-}
-
-export { 
-  Card, 
-  CardHeader, 
-  CardTitle, 
-  CardDescription, 
-  CardAction, 
-  CardContent, 
-  CardFooter 
 }
