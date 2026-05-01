@@ -14,8 +14,8 @@ function DropdownMenuTrigger({ ...props }: React.ComponentProps<typeof UI.Dropdo
 
 function DropdownMenuContent({
 	className,
-	align,
-	sideOffset,
+	align = "start",
+	sideOffset = 4,
 	...props
 }: React.ComponentProps<typeof UI.DropdownMenuContent>) {
 	return (
@@ -27,11 +27,11 @@ function DropdownMenuGroup({ ...props }: React.ComponentProps<typeof UI.Dropdown
 	return <UI.DropdownMenuGroup {...props} />
 }
 
-function DropdownMenuLabel({ className, ...props }: React.ComponentProps<typeof UI.DropdownMenuLabel>) {
-	return <UI.DropdownMenuLabel className={className} {...props} />
+function DropdownMenuLabel({ className, inset, ...props }: React.ComponentProps<typeof UI.DropdownMenuLabel> & { inset?: boolean }) {
+	return <UI.DropdownMenuLabel className={className} inset={inset} {...props} />
 }
 
-function DropdownMenuItem({ className, ...props }: React.ComponentProps<typeof UI.DropdownMenuItem>) {
+function DropdownMenuItem({ className, inset, ...props }: React.ComponentProps<typeof UI.DropdownMenuItem>) {
 	return <UI.DropdownMenuItem className={className} {...props} />
 }
 

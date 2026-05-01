@@ -1,7 +1,7 @@
 import * as UI from "./ui/input"
 
-function Input({ ...props }: React.ComponentProps<typeof UI.Input>) {
-	return <UI.Input {...props} />
+function Input({ className, type, ...props }: React.ComponentProps<typeof UI.Input>) {
+	return <UI.Input className={className} type={type} {...props} />
 }
 
 export { Input }
