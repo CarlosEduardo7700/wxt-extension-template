@@ -11,12 +11,15 @@ function Tabs({
   orientation = "horizontal",
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Root>) {
+  const isHorizontal = orientation === "horizontal"
+
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
       data-orientation={orientation}
       className={cn(
-        "group/tabs flex gap-2 data-horizontal:flex-col",
+        "group/tabs flex gap-2",
+        isHorizontal ? "flex-col" : "flex-row",
         className
       )}
       {...props}
