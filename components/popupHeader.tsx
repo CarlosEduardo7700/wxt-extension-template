@@ -6,10 +6,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-// import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
-// import { Badge } from "@/components/ui/badge";
-import { Settings, LogOut, User, LayoutGrid, UserRound, UserRoundPen } from "lucide-react"; // Ícones padrão
+import { Settings, LogOut, LayoutGrid, UserRound, UserRoundPen } from "lucide-react";
 
 export function Header() {
   return (
