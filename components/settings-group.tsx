@@ -27,7 +27,7 @@ export function SettingsGroup() {
 
             <div className="flex items-center gap-2">
               <Label htmlFor="option-1">Name option</Label>
-              <InfoTooltip />
+              <InfoTooltip content="Description for this option." />
             </div>
             <Switch id="option-1" />
 
@@ -37,7 +37,7 @@ export function SettingsGroup() {
 
             <div className="flex items-center gap-2">
               <Label htmlFor="option-2">Name option</Label>
-              <InfoTooltip />
+              <InfoTooltip content="Description for this option." />
             </div>
             <Switch id="option-2" defaultChecked />
             
