@@ -6,19 +6,25 @@ import {
 } from "./ui/tooltip";
 import { Info } from "lucide-react";
 
-export function InfoTooltip() {
+interface InfoTooltipProps {
+  size?: number
+  content: string
+  [key: string]: any
+}
+
+export function InfoTooltip({ size = 14, content, ...props }: InfoTooltipProps) {
   return (
     <TooltipProvider>
       <Tooltip>
 
         <TooltipTrigger asChild>
-        <Info size={14} className="text-muted-foreground" />
+          <Info size={size} className="text-muted-foreground" {...props} />
         </TooltipTrigger>
 
         <TooltipContent>
-        <p className="text-xs w-48">
-            Description for this option.
-        </p>
+          <p className="text-xs w-48">
+            {content}
+          </p>
         </TooltipContent>
 
       </Tooltip>
