@@ -34,20 +34,20 @@ export function AuthForm() {
       </CardHeader>
 
       <CardContent>
-        <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
+        <form id="auth-form" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <Controller
               name="email"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-email">E-mail</FieldLabel>
+                  <FieldLabel htmlFor="auth-form-email">E-mail</FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-demo-email"
+                    id="auth-form-email"
                     type="email"
                     aria-invalid={fieldState.invalid}
-                    placeholder="seuemail@exemplo.com"
+                    placeholder="yourname@example.com"
                     autoComplete="email"
                   />
                   {fieldState.invalid && (
@@ -61,13 +61,13 @@ export function AuthForm() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="form-rhf-demo-password">Senha</FieldLabel>
+                  <FieldLabel htmlFor="auth-form-password">Password</FieldLabel>
                   <Input
                     {...field}
-                    id="form-rhf-demo-password"
+                    id="auth-form-password"
                     type="password"
                     aria-invalid={fieldState.invalid}
-                    placeholder="Digite sua senha"
+                    placeholder="Enter your password"
                     autoComplete="current-password"
                   />
                   {fieldState.invalid && (
@@ -78,7 +78,7 @@ export function AuthForm() {
             />
             <p className="text-right text-xs text-muted-foreground">
               <button type="button" className="underline-offset-4 hover:underline">
-                Esqueceu sua senha?
+                Forgot your password?
               </button>
             </p>
           </FieldGroup>
@@ -87,7 +87,7 @@ export function AuthForm() {
 
       <CardFooter className="flex-col items-stretch gap-3">
         <Field orientation="horizontal" className="justify-between">
-          <Button type="submit" form="form-rhf-demo">
+          <Button type="submit" form="auth-form">
             Log in
           </Button>
           <Button type="button" variant="outline">

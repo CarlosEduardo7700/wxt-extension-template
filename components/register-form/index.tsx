@@ -36,6 +36,7 @@ export function RegisterForm() {
 
   return (
     <Card className="w-full sm:max-w-md">
+      
       <CardHeader>
         <CardTitle>Sign up</CardTitle>
         <CardDescription>
@@ -44,17 +45,17 @@ export function RegisterForm() {
       </CardHeader>
 
       <CardContent>
-        <form id="register-form-template" onSubmit={form.handleSubmit(onSubmit)}>
+        <form id="register-form" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <Controller
               name="fullName"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="register-full-name">Full name</FieldLabel>
+                  <FieldLabel htmlFor="register-form-full-name">Full name</FieldLabel>
                   <Input
                     {...field}
-                    id="register-full-name"
+                    id="register-form-full-name"
                     aria-invalid={fieldState.invalid}
                     placeholder="Your full name"
                     autoComplete="name"
@@ -69,13 +70,13 @@ export function RegisterForm() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="register-email">Email</FieldLabel>
+                  <FieldLabel htmlFor="register-form-email">Email</FieldLabel>
                   <Input
                     {...field}
-                    id="register-email"
+                    id="register-form-email"
                     type="email"
                     aria-invalid={fieldState.invalid}
-                    placeholder="you@email.com"
+                    placeholder="yourname@example.com"
                     autoComplete="email"
                   />
                   {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -88,12 +89,12 @@ export function RegisterForm() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="register-phone">Phone</FieldLabel>
+                  <FieldLabel htmlFor="register-form-phone">Phone</FieldLabel>
                   <Input
                     {...field}
-                    id="register-phone"
+                    id="register-form-phone"
                     aria-invalid={fieldState.invalid}
-                    placeholder="(11) 99999-9999"
+                    placeholder="(123) 456-7890"
                     autoComplete="tel"
                   />
                   {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -106,9 +107,9 @@ export function RegisterForm() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="register-role">Role</FieldLabel>
+                  <FieldLabel htmlFor="register-form-role">Role</FieldLabel>
                   <Select value={field.value} onValueChange={field.onChange}>
-                    <SelectTrigger id="register-role" aria-invalid={fieldState.invalid} className="w-full">
+                    <SelectTrigger id="register-form-role" aria-invalid={fieldState.invalid} className="w-full">
                       <SelectValue placeholder="Select your role" />
                     </SelectTrigger>
                     <SelectContent>
@@ -128,10 +129,10 @@ export function RegisterForm() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="register-password">Password</FieldLabel>
+                  <FieldLabel htmlFor="register-form-password">Password</FieldLabel>
                   <Input
                     {...field}
-                    id="register-password"
+                    id="register-form-password"
                     type="password"
                     aria-invalid={fieldState.invalid}
                     placeholder="Create a strong password"
@@ -149,13 +150,13 @@ export function RegisterForm() {
               render={({ field }) => (
                 <Field orientation="horizontal">
                   <div className="flex flex-col gap-0.5">
-                    <FieldLabel htmlFor="register-news">Receive updates</FieldLabel>
+                    <FieldLabel htmlFor="register-form-news">Receive updates</FieldLabel>
                     <FieldDescription>
                       We'll send occasional updates by email.
                     </FieldDescription>
                   </div>
                   <Switch
-                    id="register-news"
+                    id="register-form-news"
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
@@ -169,13 +170,13 @@ export function RegisterForm() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid} orientation="horizontal">
                   <Checkbox
-                    id="register-terms"
+                    id="register-form-terms"
                     checked={field.value}
                     onCheckedChange={(checked) => field.onChange(checked === true)}
                     aria-invalid={fieldState.invalid}
                   />
                   <div className="flex flex-col gap-0.5">
-                    <FieldLabel htmlFor="register-terms">I accept the terms of use</FieldLabel>
+                    <FieldLabel htmlFor="register-form-terms">I accept the terms of use</FieldLabel>
                     <FieldDescription>
                       Required to complete registration.
                     </FieldDescription>
@@ -193,11 +194,12 @@ export function RegisterForm() {
           <Button type="button" variant="outline" onClick={() => form.reset()}>
             Clear
           </Button>
-          <Button type="submit" form="register-form-template">
+          <Button type="submit" form="register-form">
             Create account
           </Button>
         </Field>
       </CardFooter>
+      
     </Card>
   )
 }
