@@ -15,7 +15,7 @@ interface TabsContentProps {
 
 export function Tabs({ tabsTitles, defaultValue, children }: TabsProps) {
   return (
-    <UI.Tabs defaultValue={defaultValue} orientation="horizontal" className="w-100">
+    <UI.Tabs defaultValue={defaultValue} orientation="horizontal">
 
       <UI.TabsList variant="default">
         {tabsTitles.map((title) => (

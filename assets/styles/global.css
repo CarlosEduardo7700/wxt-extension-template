@@ -41,6 +41,31 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  [data-slot="tabs"] {
+    @apply w-full;
+  }
+
+  [data-slot="tabs-list"] {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  [data-slot="tabs-list"]::-webkit-scrollbar {
+    display: none;
+    height: 0;
+  }
+
+  [data-slot="tabs-content"] {
+    @apply w-full overflow-x-hidden;
+  }
+
+  [data-slot="tabs-content"] [data-slot="card"] {
+    @apply w-full;
+    max-width: 100%;
+  }
+
   ::-webkit-scrollbar {
     width: 5px;
   }
