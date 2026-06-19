@@ -20,9 +20,17 @@ import {
 import { Input } from "../ui/input"
 import { onSubmit } from "./on-subit"
 import { useAuthForm } from "./validation"
+import { RegisterForm } from "../register-form"
+import { useState } from "react"
 
 export function AuthForm() {
   const form = useAuthForm()
+  const [isRegistering, setIsRegistering] = useState(false)
+
+  if (isRegistering) {
+    return <RegisterForm onBackToLogin={() => setIsRegistering(false)} />
+  }
+  
   return (
     <Card className="w-full sm:max-w-md">
 
@@ -36,6 +44,7 @@ export function AuthForm() {
       <CardContent>
         <form id="auth-form" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
+            
             <Controller
               name="email"
               control={form.control}
@@ -56,6 +65,7 @@ export function AuthForm() {
                 </Field>
               )}
             />
+
             <Controller
               name="password"
               control={form.control}
@@ -76,24 +86,31 @@ export function AuthForm() {
                 </Field>
               )}
             />
+
             <p className="text-right text-xs text-muted-foreground">
               <button type="button" className="underline-offset-4 hover:underline">
                 Forgot your password?
               </button>
             </p>
+
           </FieldGroup>
         </form>
       </CardContent>
 
       <CardFooter className="flex-col items-stretch gap-3">
+
         <Field orientation="horizontal" className="justify-between">
+
           <Button type="submit" form="auth-form">
             Log in
           </Button>
-          <Button type="button" variant="outline">
+
+          <Button type="button" variant="outline" onClick={() => setIsRegistering(true)}>
             Sign up
           </Button>
+
         </Field>
+
       </CardFooter>
 
     </Card>
