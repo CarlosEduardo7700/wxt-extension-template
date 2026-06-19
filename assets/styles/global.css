@@ -88,3 +88,98 @@
     @apply text-sm leading-relaxed text-muted-foreground;
   }
 }
+
+@layer components {
+  .paywall-content {
+    max-width: 320px;
+    @apply rounded-lg p-5 gap-4;
+  }
+
+  .paywall-header {
+    @apply items-center text-center;
+  }
+
+  .paywall-crown {
+    @apply h-6 w-6 fill-primary;
+  }
+
+  .paywall-features {
+    @apply space-y-2.5 my-1;
+  }
+
+  .paywall-feature-item {
+    @apply flex items-start gap-2.5 text-sm;
+  }
+
+  .paywall-feature-check {
+    @apply h-4 w-4 text-primary shrink-0 mt-0.5;
+  }
+
+  .paywall-feature-text {
+    @apply text-xs text-muted-foreground;
+  }
+
+  .paywall-loader {
+    @apply mr-2 h-4 w-4 animate-spin;
+  }
+
+  .popup-header {
+    @apply flex items-center justify-between w-full px-2 py-1 border-b bg-background;
+  }
+
+  .popup-header-brand {
+    @apply flex items-center gap-2;
+  }
+
+  .popup-header-logo {
+    @apply flex items-center justify-center w-8 h-8 rounded-lg bg-primary text-primary-foreground;
+  }
+
+  .popup-header-title-wrapper {
+    @apply flex flex-col;
+  }
+
+  .popup-header-title {
+    @apply text-sm font-bold leading-none text-foreground;
+  }
+
+  .popup-header-actions {
+    @apply flex items-center gap-2;
+  }
+
+  .popup-header-avatar-btn {
+    @apply relative w-8 h-8 rounded-full;
+  }
+
+  .popup-header-user-label {
+    @apply font-normal;
+  }
+
+  .popup-header-user-info {
+    @apply flex flex-col space-y-1;
+  }
+
+  .popup-header-username {
+    @apply text-sm font-medium leading-none;
+  }
+
+  .popup-header-useremail {
+    @apply text-xs leading-none text-muted-foreground;
+  }
+
+  .popup-header-upgrade-item {
+    @apply text-primary font-medium cursor-pointer;
+  }
+
+  .popup-header-upgrade-icon {
+    @apply mr-2 h-4 w-4 fill-primary;
+  }
+
+  .popup-header-logout-item {
+    @apply text-destructive;
+  }
+
+  .popup-header-logout-icon {
+    @apply w-4 h-4 mr-2;
+  }
+}

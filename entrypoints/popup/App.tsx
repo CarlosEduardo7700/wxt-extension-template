@@ -1,46 +1,71 @@
-import { Button } from "../../components/ui/button";
-import { Header } from "../../components/popup-header";
+import { Header } from "../../components/header/header";
 import { Toaster } from "../../components/ui/sonner";
-import { toast } from "sonner";
 import { Tabs, TabsContent } from "../../components/tabs";
+import { ContactForm } from "../../components/contact-form";
+import { SettingsGroup } from "../../components/settings-group";
+import { AuthForm } from "../../components/auth-form";
+import { Session } from "@supabase/supabase-js";
+import { useEffect } from "react";
+import { supabase } from "../../lib/supabase";
+import { useState } from "react";
+import { PaywallModal } from "../../components/paywall-modal/paywall-modal";
+import { Loading } from "../../components/loading";
 
 function App() {
+  const [session, setSession] = useState<Session | null>(null);
+  const [isPaywallOpen, setIsPaywallOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+      setLoading(false)
+    })
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
+
+  if (loading) {
+    return (
+      <Loading />
+    )
+  }
+
   return (
     <div className="p-4">
-      <Header />
-      <h1>Hello World!!</h1>
-      <h2>Hello World!!</h2>
-      <p>Hello World!!</p>
-      <hr />
-      <Button variant="default" size="lg">
-        <a href="https://google.com" target="_blank" rel="noreferrer">
-          Abrir Google
-        </a>
-      </Button>
-      <hr />
-      <Button variant="default" size="lg" onClick={() => toast.info("Hello World!!")}>
-          Abrir
-      </Button>
-      <hr />
-      <Tabs tabsTitles={["Overview", "Analytics", "Reports", "Settings"]} defaultValue="overview">
-        <TabsContent value="overview">
-          <p>Add any overview content you like here.</p>
-        </TabsContent>
+      {!session ? (
+        <div>
+          <AuthForm />
+        </div>
+      ) : (
+        <div>
+          <Header 
+            userName={session?.user?.user_metadata?.full_name || "User"}
+            userEmail={session?.user?.email || "No email"} 
+            onUpgradeClick={() => setIsPaywallOpen(true)} 
+            onLogoutClick={() => supabase.auth.signOut()}
+          />
+          <Tabs tabsTitles={["Overview", "Settings", "Support"]} defaultValue="overview">
+            <TabsContent value="overview">
+              <p>Add any overview content you like here.</p>
+            </TabsContent>
 
-        <TabsContent value="analytics">
-          <p>Add any analytics content you like here.</p>
-        </TabsContent>
+            <TabsContent value="support">
+              <ContactForm />
+            </TabsContent>
 
-        <TabsContent value="reports">
-          <p>Add any reports content you like here.</p>
-        </TabsContent>
-
-        <TabsContent value="settings">
-          <p>Add any settings content you like here.</p>
-        </TabsContent>
-      </Tabs>
-      <hr />
+            <TabsContent value="settings">
+              <SettingsGroup />
+            </TabsContent>
+          </Tabs>
+        </div>
+      )}
       <Toaster />
+      <PaywallModal open={isPaywallOpen} onOpenChange={setIsPaywallOpen} />
     </div>
   );
 }
