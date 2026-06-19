@@ -11,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card"
-import { Checkbox } from "../ui/checkbox"
 import {
   Field,
   FieldDescription,
@@ -20,18 +19,14 @@ import {
   FieldLabel,
 } from "../ui/field"
 import { Input } from "../ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select"
-import { Switch } from "../ui/switch"
 import { onSubmit } from "./on-submit"
 import { useRegisterForm } from "./validation"
 
-export function RegisterForm() {
+interface RegisterFormProps {
+  onBackToLogin: () => void
+}
+
+export function RegisterForm({ onBackToLogin }: RegisterFormProps) {
   const form = useRegisterForm()
 
   return (
@@ -85,46 +80,6 @@ export function RegisterForm() {
             />
 
             <Controller
-              name="phone"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="register-form-phone">Phone</FieldLabel>
-                  <Input
-                    {...field}
-                    id="register-form-phone"
-                    aria-invalid={fieldState.invalid}
-                    placeholder="(123) 456-7890"
-                    autoComplete="tel"
-                  />
-                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-                </Field>
-              )}
-            />
-
-            <Controller
-              name="role"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="register-form-role">Role</FieldLabel>
-                  <Select value={field.value} onValueChange={field.onChange}>
-                    <SelectTrigger id="register-form-role" aria-invalid={fieldState.invalid} className="w-full">
-                      <SelectValue placeholder="Select your role" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="developer">Developer</SelectItem>
-                      <SelectItem value="designer">Designer</SelectItem>
-                      <SelectItem value="product">Product</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-                </Field>
-              )}
-            />
-
-            <Controller
               name="password"
               control={form.control}
               render={({ field, fieldState }) => (
@@ -144,60 +99,25 @@ export function RegisterForm() {
               )}
             />
 
-            <Controller
-              name="receiveNews"
-              control={form.control}
-              render={({ field }) => (
-                <Field orientation="horizontal">
-                  <div className="flex flex-col gap-0.5">
-                    <FieldLabel htmlFor="register-form-news">Receive updates</FieldLabel>
-                    <FieldDescription>
-                      We'll send occasional updates by email.
-                    </FieldDescription>
-                  </div>
-                  <Switch
-                    id="register-form-news"
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </Field>
-              )}
-            />
-
-            <Controller
-              name="acceptTerms"
-              control={form.control}
-              render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid} orientation="horizontal">
-                  <Checkbox
-                    id="register-form-terms"
-                    checked={field.value}
-                    onCheckedChange={(checked) => field.onChange(checked === true)}
-                    aria-invalid={fieldState.invalid}
-                  />
-                  <div className="flex flex-col gap-0.5">
-                    <FieldLabel htmlFor="register-form-terms">I accept the terms of use</FieldLabel>
-                    <FieldDescription>
-                      Required to complete registration.
-                    </FieldDescription>
-                    {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-                  </div>
-                </Field>
-              )}
-            />
           </FieldGroup>
         </form>
+
       </CardContent>
 
       <CardFooter className="flex-col items-stretch gap-3">
+
         <Field orientation="horizontal" className="justify-between">
-          <Button type="button" variant="outline" onClick={() => form.reset()}>
-            Clear
-          </Button>
+
           <Button type="submit" form="register-form">
             Create account
           </Button>
+
+          <Button type="button" variant="outline" onClick={onBackToLogin}>
+            Back to Log in
+          </Button>
+
         </Field>
+
       </CardFooter>
       
     </Card>
