@@ -17,7 +17,7 @@ export function ContactForm() {
   const form = useContactForm();
 
   return (
-    <Card className="w-full sm:max-w-md">
+    <Card>
 
       <CardHeader>
         <CardTitle>Send email</CardTitle>
