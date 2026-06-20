@@ -4,63 +4,15 @@ import { Tabs, TabsContent } from "../../components/tabs";
 import { ContactForm } from "../../components/contact-form";
 import { SettingsGroup } from "../../components/settings-group";
 import { AuthForm } from "../../components/auth-form";
-import { Session } from "@supabase/supabase-js";
-import { useEffect } from "react";
 import { supabase } from "../../lib/supabase";
 import { useState } from "react";
 import { PaywallModal } from "../../components/paywall-modal/paywall-modal";
 import { Loading } from "../../components/loading";
-
-interface UserProfile {
-  id: string
-  email: string
-  full_name: string
-  is_pro: boolean
-}
+import { useSession } from "./hooks/useSession";
 
 export default function App() {
-  const [session, setSession] = useState<Session | null>(null);
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const { session, userProfile, loading } = useSession()
   const [isPaywallOpen, setIsPaywallOpen] = useState(false)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      if (session) fetchUserProfile(session.user.id)
-      else setLoading(false)
-    })
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-      if (session) {
-        fetchUserProfile(session.user.id)
-      } else {
-        setUserProfile(null)
-        setLoading(false)
-      }
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
-
-  async function fetchUserProfile(userId: string) {
-    try {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("id, email, full_name, is_pro")
-        .eq("id", userId)
-        .single()
-
-      if (error) throw error
-
-      setUserProfile(data)
-    } catch (err) {
-      console.error("Erro ao carregar perfil:", err)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   if (loading) return <Loading />
 
