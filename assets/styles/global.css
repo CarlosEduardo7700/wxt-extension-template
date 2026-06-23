@@ -159,6 +159,10 @@
     @apply flex flex-col space-y-1;
   }
 
+  .popup-header-name-row {
+    @apply flex items-center gap-1.5;
+  }
+
   .popup-header-username {
     @apply text-sm font-medium leading-none;
   }

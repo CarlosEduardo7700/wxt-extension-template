@@ -7,9 +7,10 @@ interface UserDropdownMenuProps {
   onLogoutClick?: () => void
   userEmail?: string
   userName?: string
+  isPro?: boolean
 }
 
-export function UserDropdownMenu({ userName, userEmail, onUpgradeClick, onLogoutClick }: UserDropdownMenuProps) {
+export function UserDropdownMenu({ userName, userEmail, isPro, onUpgradeClick, onLogoutClick }: UserDropdownMenuProps) {
   return (
     <UI.DropdownMenu>
       <UI.DropdownMenuTrigger asChild>
@@ -22,19 +23,26 @@ export function UserDropdownMenu({ userName, userEmail, onUpgradeClick, onLogout
 
         <UI.DropdownMenuLabel className="popup-header-user-label">
           <div className="popup-header-user-info">
-            <p className="popup-header-username">{userName}</p>
+            <div className="popup-header-name-row">
+              <p className="popup-header-username">{userName}</p>
+              {isPro && <Crown className="popup-header-upgrade-icon" />}
+            </div>
             <p className="popup-header-useremail">{userEmail}</p>
           </div>
         </UI.DropdownMenuLabel>
 
         <UI.DropdownMenuSeparator />
 
-        <UI.DropdownMenuItem onClick={onUpgradeClick} className="popup-header-upgrade-item">
-          <Crown className="popup-header-upgrade-icon" />
-          <span>Upgrade to Pro</span>
-        </UI.DropdownMenuItem>
+        {!isPro && (
+          <div>
+            <UI.DropdownMenuItem onClick={onUpgradeClick} className="popup-header-upgrade-item">
+              <Crown className="popup-header-upgrade-icon" />
+              <span>Upgrade to Pro</span>
+            </UI.DropdownMenuItem>
+            <UI.DropdownMenuSeparator />
+          </div>
+        )}
         
-        <UI.DropdownMenuSeparator />
 
         <UI.DropdownMenuItem onClick={onLogoutClick} className="popup-header-logout-item">
           <LogOut className="popup-header-logout-icon" />

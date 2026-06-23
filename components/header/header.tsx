@@ -6,9 +6,10 @@ interface HeaderProps {
   onUpgradeClick: () => void
   onLogoutClick: () => void
   userName?: string
+  isPro?: boolean
 }
 
-export function Header({ userName, userEmail, onUpgradeClick, onLogoutClick }: HeaderProps) {
+export function Header({ userName, userEmail, onUpgradeClick, onLogoutClick, isPro }: HeaderProps) {
   return (
     <header className="popup-header">
       <div className="popup-header-brand">
@@ -30,6 +31,7 @@ export function Header({ userName, userEmail, onUpgradeClick, onLogoutClick }: H
         <UserDropdownMenu
           userName={userName}
           userEmail={userEmail}
+          isPro={isPro}
           onUpgradeClick={onUpgradeClick} 
           onLogoutClick={onLogoutClick}
         />

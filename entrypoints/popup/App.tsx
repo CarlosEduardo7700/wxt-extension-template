@@ -29,7 +29,8 @@ export default function App() {
     <div className="p-4">
       <Header 
         userName={userProfile?.full_name || "User"}
-        userEmail={userProfile?.email || "No email"} 
+        userEmail={userProfile?.email || "No email"}
+        isPro={userProfile?.is_pro || false} 
         onUpgradeClick={() => setIsPaywallOpen(true)} 
         onLogoutClick={() => supabase.auth.signOut()}
       />
