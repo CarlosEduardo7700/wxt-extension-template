@@ -16,36 +16,37 @@ export default function App() {
 
   if (loading) return <Loading />
 
+  if (!session) {
+    return (
+      <div className="p-4">
+        <AuthForm />
+        <Toaster />
+      </div>
+    )
+  }
+
   return (
     <div className="p-4">
-      {!session ? (
-        <div>
-          <AuthForm />
-        </div>
-      ) : (
-        <div>
-          <Header 
-            userName={userProfile?.full_name || "User"}
-            userEmail={userProfile?.email || "No email"} 
-            onUpgradeClick={() => setIsPaywallOpen(true)} 
-            onLogoutClick={() => supabase.auth.signOut()}
-          />
-          <Tabs tabsTitles={["Overview", "Settings", "Support"]} defaultValue="overview">
-            <TabsContent value="overview">
-              <p>{userProfile?.is_pro ? "You are a Pro user." : "You are not a Pro user."}</p>
-              <p>Add any overview content you like here.</p>
-            </TabsContent>
+      <Header 
+        userName={userProfile?.full_name || "User"}
+        userEmail={userProfile?.email || "No email"} 
+        onUpgradeClick={() => setIsPaywallOpen(true)} 
+        onLogoutClick={() => supabase.auth.signOut()}
+      />
+      <Tabs tabsTitles={["Overview", "Settings", "Support"]} defaultValue="overview">
+        <TabsContent value="overview">
+          <p>{userProfile?.is_pro ? "You are a Pro user." : "You are not a Pro user."}</p>
+          <p>Add any overview content you like here.</p>
+        </TabsContent>
 
-            <TabsContent value="support">
-              <ContactForm />
-            </TabsContent>
+        <TabsContent value="support">
+          <ContactForm />
+        </TabsContent>
 
-            <TabsContent value="settings">
-              <SettingsGroup />
-            </TabsContent>
-          </Tabs>
-        </div>
-      )}
+        <TabsContent value="settings">
+          <SettingsGroup />
+        </TabsContent>
+      </Tabs>
       <Toaster />
       <PaywallModal open={isPaywallOpen} onOpenChange={setIsPaywallOpen} />
     </div>
