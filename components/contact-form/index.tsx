@@ -8,7 +8,7 @@ import { onSubmit } from "./on-submit";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { CardFooter } from "../ui/card";
 
-export function ContactForm() {
+export function ContactForm({ userProfile }: { userProfile: { email: string; full_name: string } | null }) {
   const form = useContactForm();
 
   return (
@@ -22,7 +22,7 @@ export function ContactForm() {
       </CardHeader>
 
       <CardContent>
-        <form id="contact-form" onSubmit={form.handleSubmit(onSubmit)}>
+        <form id="contact-form" onSubmit={form.handleSubmit((data) => onSubmit(data, userProfile, form.reset))}>
           <FieldGroup>
             <Controller
               name="subject"

@@ -1,18 +1,34 @@
 import * as React from "react"
 import { toast } from "sonner"
-import * as z from "zod"
-import { formSchema } from "./validation"
+import { supabase } from "../../lib/supabase"
 
-export function onSubmit(data: z.infer<typeof formSchema>) {
-    const emailData = {
-      to: import.meta.env.VITE_CONTACT_EMAIL,
-      subject: encodeURIComponent(`[Feedback Extensão] ${data.subject}`),
-      body: encodeURIComponent(`${data.message}\n\n---\nEnviado via Extensão`),
-    };
+interface ContactFormData {
+  subject: string;
+  message: string;
+}
 
-    const mailtoUrl = `mailto:${emailData.to}?subject=${emailData.subject}&body=${emailData.body}`;
+export async function onSubmit(
+  data: ContactFormData, 
+  userProfile: { email: string; full_name: string } | null,
+  resetForm: () => void
+) {
+  try {
+    const { data: response, error } = await supabase.functions.invoke('send-support-email', {
+      body: {
+        subject: data.subject,
+          message: data.message,
+          userEmail: userProfile?.email || "Anônimo",
+          userName: userProfile?.full_name || "Usuário da Extensão"
+      },
+    });
+
+    if (error) throw error;
+
+    toast.success("Message sent successfully!");
+    resetForm();
     
-    window.open(mailtoUrl, "_blank");
-    
-    toast.success("Cliente de e-mail aberto!");
+  } catch (error) {
+    console.error("Error sending email:", error);
+    toast.error("Failed to send message. Please try again.");
   }
+}

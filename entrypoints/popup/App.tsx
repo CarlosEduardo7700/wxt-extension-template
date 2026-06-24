@@ -41,7 +41,7 @@ export default function App() {
         </TabsContent>
 
         <TabsContent value="support">
-          <ContactForm />
+          <ContactForm userProfile={userProfile} />
         </TabsContent>
 
         <TabsContent value="settings">
