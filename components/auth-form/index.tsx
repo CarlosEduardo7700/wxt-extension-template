@@ -22,15 +22,21 @@ import { onSubmit } from "./on-subit"
 import { useAuthForm } from "./validation"
 import { RegisterForm } from "../register-form"
 import { useState } from "react"
+import { handleForgotPassword } from "./on-forgot"
 
 export function AuthForm() {
   const form = useAuthForm()
   const [isRegistering, setIsRegistering] = useState(false)
 
+  const onForgotClick = async () => {
+    const emailValue = form.getValues("email")
+    await handleForgotPassword(emailValue)
+  }
+
   if (isRegistering) {
     return <RegisterForm onBackToLogin={() => setIsRegistering(false)} />
   }
-  
+
   return (
     <Card className="w-full sm:max-w-md">
 
@@ -88,7 +94,7 @@ export function AuthForm() {
             />
 
             <p className="text-right text-xs text-muted-foreground">
-              <button type="button" className="underline-offset-4 hover:underline">
+              <button type="button" onClick={onForgotClick} className="underline-offset-4 hover:underline">
                 Forgot your password?
               </button>
             </p>
