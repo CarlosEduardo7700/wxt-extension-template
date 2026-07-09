@@ -9,7 +9,7 @@ export async function handleForgotPassword(email: string) {
 
   try {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "https://seu-site-web.com/reset-password", 
+      redirectTo: "http://localhost:3001/reset-password", 
     })
 
     if (error) throw error
