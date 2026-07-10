@@ -13,7 +13,7 @@ export async function onSubmit(
   resetForm: () => void
 ) {
   try {
-    const { data: response, error } = await supabase.functions.invoke('send-support-email', {
+    const { error } = await supabase.functions.invoke('send-support-email', {
       body: {
         subject: data.subject,
           message: data.message,
