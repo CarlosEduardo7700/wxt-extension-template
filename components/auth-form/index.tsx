@@ -18,7 +18,7 @@ import {
   FieldLabel,
 } from "../ui/field"
 import { Input } from "../ui/input"
-import { onSubmit } from "./on-subit"
+import { onSubmit } from "./on-submit"
 import { useAuthForm } from "./validation"
 import { RegisterForm } from "../register-form"
 import { useState } from "react"
