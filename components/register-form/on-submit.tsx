@@ -5,7 +5,8 @@ import { supabase } from "../../lib/supabase"
 
 export async function onSubmit(data: z.infer<typeof formSchema>) {
   try {
-    console.log("Submitting registration form with data:", data)
+    // Avoid logging credentials
+
     const { error } = await supabase.auth.signUp({
       email: data.email,
       password: data.password,
