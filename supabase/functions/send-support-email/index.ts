@@ -53,7 +53,7 @@ serve(async (req) => {
     const data = await res.json()
 
     return new Response(JSON.stringify(data), {
-      status: 200,
+      status: res.ok ? 200 : res.status,
       headers: corsHeaders,
     })
   } catch (error: any) {
