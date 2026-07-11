@@ -43,8 +43,8 @@ serve(async (req) => {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'Suporte Extensao <onboarding@resend.dev>',
-        to: 'mendoncaeduardo652@gmail.com',
+        from: Deno.env.get("SUPPORT_FROM_EMAIL") ?? "Support <onboarding@resend.dev>",
+        to: Deno.env.get("SUPPORT_TO_EMAIL") ?? "support@example.com",
         subject: `[Suporte App] ${subject}`,
         html: `
           <h3>Novo contato recebido da extensão!</h3>
