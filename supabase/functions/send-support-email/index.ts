@@ -21,8 +21,21 @@ serve(async (req) => {
   }
 
   try {
+    if (!RESEND_API_KEY) {
+      return new Response(JSON.stringify({ error: "Server misconfigured" }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      })
+    }
+
     const { subject, message, userEmail, userName } = await req.json()
 
+    if (typeof subject !== "string" || typeof message !== "string") {
+      return new Response(JSON.stringify({ error: "Invalid request body" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      })
+    }
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
