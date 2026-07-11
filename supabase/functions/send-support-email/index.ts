@@ -46,12 +46,7 @@ serve(async (req) => {
         from: Deno.env.get("SUPPORT_FROM_EMAIL") ?? "Support <onboarding@resend.dev>",
         to: Deno.env.get("SUPPORT_TO_EMAIL") ?? "support@example.com",
         subject: `[Suporte App] ${subject}`,
-        html: `
-          <h3>Novo contato recebido da extensão!</h3>
-          <p><strong>Usuário:</strong> ${userName} (${userEmail})</p>
-          <p><strong>Mensagem:</strong></p>
-          <p style="white-space: pre-wrap;">${message}</p>
-        `,
+        text: `Novo contato recebido da extensão!\n\nUsuário: ${userName} (${userEmail})\n\nMensagem:\n${message}`,
       }),
     })
 
